@@ -25,3 +25,15 @@ app.post('/cadastro', (req,res) =>{
 
 })
 
+app.get('/cadastro/:id', (req, res) => {
+    const { id } = req.params; // Pega o ID da URL
+    const logs = fs.readFileSync('logs.txt', 'utf-8').split('\n');
+  
+    const logEncontrado = logs.find((linha) => linha.includes(id));
+    if (!logEncontrado) {
+      return res.status(404);
+    }
+  
+    res.json({ log: logEncontrado });
+  });
+
